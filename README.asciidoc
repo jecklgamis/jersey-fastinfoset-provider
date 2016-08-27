@@ -1,7 +1,5 @@
-jersey-fastinfoset-provider
----------------------------
 
-Jersey 2 Fastinfoset Provider
+Jersey 2 Fastinfoset Provider image:https://travis-ci.org/jecklgamis/jersey-fastinfoset-provider.svg?branch=master["Build Status", link="https://travis-ci.org/jecklgamis/jersey-fastinfoset-provider"]
 
 Maven dependency
 
