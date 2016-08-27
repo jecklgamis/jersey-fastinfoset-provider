@@ -1,0 +1,45 @@
+jersey-fastinfoset-provider
+---------------------------
+
+Jersey 2 Fastinfoset Provider
+
+Maven dependency
+
+----
+<dependency>
+    <groupId>io.jecklgamis</groupId>
+    <artifactId>jersey-fastinfoset-provider</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+----
+
+Example Server Configuration (Dropwizard)
+-----------------------------------------
+
+----
+public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
+    @Override
+    public void run(ExampleAppConfig config, Environment env) throws Exception {
+        env.jersey().register(FastInfosetJAXBElementProvider.class);
+        env.jersey().register(FastInfosetRootElementProvider.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new ExampleApp().run(args);
+    }
+}
+----
+
+Example Client Configuration (Jersey 2 Client)
+----------------------------------------------
+
+----
+private Client client() {
+    ClientConfig config = new ClientConfig();
+    config.register(FastInfosetJAXBElementProvider.class);
+    config.register(FastInfosetRootElementProvider.class);
+    config.property(ClientProperties.CONNECT_TIMEOUT, 5000);
+    config.property(ClientProperties.READ_TIMEOUT, 15000);
+    return JerseyClientBuilder.createClient(config);
+}
+----

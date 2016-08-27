@@ -1,0 +1,10 @@
+server:
+  applicationConnectors:
+   - type: http
+     port: 5050
+  adminConnectors:
+    - type: http
+      port: 5081
+
+logging:
+  level: INFO
