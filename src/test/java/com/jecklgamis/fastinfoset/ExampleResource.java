@@ -1,4 +1,4 @@
-package io.jecklgamis.fastinfoset;
+package com.jecklgamis.fastinfoset;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

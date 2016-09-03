@@ -1,9 +1,9 @@
-package io.jecklgamis.fastinfoset;
+package com.jecklgamis.fastinfoset;
 
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.setup.Environment;
-import io.jecklgamis.FastInfosetJAXBElementProvider;
-import io.jecklgamis.FastInfosetRootElementProvider;
+import com.jecklgamis.FastInfosetJAXBElementProvider;
+import com.jecklgamis.FastInfosetRootElementProvider;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {

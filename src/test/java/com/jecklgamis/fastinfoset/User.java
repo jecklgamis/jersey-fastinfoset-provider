@@ -1,20 +1,20 @@
-package io.jecklgamis.fastinfoset;
+package com.jecklgamis.fastinfoset;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlType(name = "User2")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User2 {
+public class User {
     private String username;
     private String email;
 
-    public User2() {
+    public User() {
         this("user", "user@example.com");
     }
 
-    public User2(String username, String email) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
     }
@@ -26,5 +26,4 @@ public class User2 {
     public String getEmail() {
         return email;
     }
-
 }

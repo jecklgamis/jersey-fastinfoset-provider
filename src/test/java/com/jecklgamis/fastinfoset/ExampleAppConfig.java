@@ -1,4 +1,4 @@
-package io.jecklgamis.fastinfoset;
+package com.jecklgamis.fastinfoset;
 
 class ExampleAppConfig extends io.dropwizard.Configuration {
 }
