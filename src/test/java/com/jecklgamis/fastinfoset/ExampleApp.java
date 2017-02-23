@@ -16,7 +16,7 @@ public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
             }
         });
         env.jersey().register(LoggingFilter.class);
-        env.jersey().register(FastInfosetJAXBElementProvider.class);
+        env.jersey().register(FastInfosetJaxbElementProvider.class);
         env.jersey().register(FastInfosetRootElementProvider.class);
     }
 

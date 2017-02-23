@@ -1,6 +1,5 @@
 package com.jecklgamis.fastinfoset;
 
-import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.JerseyClientBuilder;
@@ -11,6 +10,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
+
+import io.dropwizard.testing.junit.DropwizardAppRule;
 
 import static io.dropwizard.testing.ResourceHelpers.resourceFilePath;
 import static java.lang.String.format;
@@ -33,7 +34,7 @@ public class ExampleAppIntTest {
     }
 
     @Test
-    public void shouldRespondToJAXBElementRequest() {
+    public void shouldRespondToJaxbElementRequest() {
         Response response = client().target(format("http://127.0.0.1:%d/jaxbElement", RULE.getLocalPort()))
                 .request().accept("application/fastinfoset")
                 .post(entity(new JAXBElement<>(new QName("", "User2"), User2.class, new User2()), "application/fastinfoset"),
@@ -47,7 +48,7 @@ public class ExampleAppIntTest {
 
     private Client client() {
         ClientConfig config = new ClientConfig();
-        config.register(FastInfosetJAXBElementProvider.class);
+        config.register(FastInfosetJaxbElementProvider.class);
         config.register(FastInfosetRootElementProvider.class);
         config.property(ClientProperties.CONNECT_TIMEOUT, 5000);
         config.property(ClientProperties.READ_TIMEOUT, 15000);

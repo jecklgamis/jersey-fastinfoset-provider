@@ -2,7 +2,14 @@ package com.jecklgamis.fastinfoset;
 
 import com.sun.xml.fastinfoset.stax.StAXDocumentParser;
 import com.sun.xml.fastinfoset.stax.StAXDocumentSerializer;
+
 import org.glassfish.jersey.jaxb.internal.AbstractCollectionJaxbProvider;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -15,11 +22,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
-import java.util.Collection;
 
 /**
  * @author Jerrico Gamis <jecklgamis@gmail.com>
@@ -33,7 +35,8 @@ public class FastInfosetListElementProvider extends AbstractCollectionJaxbProvid
     }
 
     @Override
-    public void writeCollection(Class<?> elementType, Collection<?> t, MediaType mediaType, Charset c, Marshaller m, OutputStream entityStream)
+    public void writeCollection(Class<?> elementType, Collection<?> t, MediaType mediaType,
+                                Charset c, Marshaller m, OutputStream entityStream)
             throws JAXBException, IOException {
         XMLStreamWriter xsw = new StAXDocumentSerializer(entityStream);
         String rootElement = getRootElementName(elementType);
@@ -50,7 +53,8 @@ public class FastInfosetListElementProvider extends AbstractCollectionJaxbProvid
     }
 
     @Override
-    protected XMLStreamReader getXMLStreamReader(Class<?> elementType, MediaType mediaType, Unmarshaller unmarshaller, InputStream entityStream)
+    protected XMLStreamReader getXMLStreamReader(Class<?> elementType, MediaType mediaType,
+                                                 Unmarshaller unmarshaller, InputStream entityStream)
             throws XMLStreamException {
         StAXDocumentParser parser = new StAXDocumentParser(entityStream);
         parser.setStringInterning(true);

@@ -33,9 +33,10 @@ public class FastInfosetRootElementProvider extends AbstractRootElementJaxbProvi
     }
 
     @Override
-    protected Object readFrom(Class<Object> type, MediaType mediaType, Unmarshaller u, InputStream entityStream) throws JAXBException {
+    protected Object readFrom(Class<Object> type, MediaType mediaType, Unmarshaller u,
+                              InputStream entityStream) throws JAXBException {
         StAXDocumentParser parser = new StAXDocumentParser(entityStream);
-        if (type.getClass().isAnnotationPresent(XmlRootElement.class)) {
+        if (type.isAnnotationPresent(XmlRootElement.class)) {
             return u.unmarshal(parser);
         } else {
             return u.unmarshal(parser, type).getValue();
@@ -43,7 +44,8 @@ public class FastInfosetRootElementProvider extends AbstractRootElementJaxbProvi
     }
 
     @Override
-    protected void writeTo(Object t, MediaType mediaType, Charset c, Marshaller m, OutputStream entityStream) throws JAXBException {
+    protected void writeTo(Object t, MediaType mediaType, Charset c, Marshaller m,
+                           OutputStream entityStream) throws JAXBException {
         XMLStreamWriter xsw = new StAXDocumentSerializer(entityStream);
         m.marshal(t, xsw);
         try {
