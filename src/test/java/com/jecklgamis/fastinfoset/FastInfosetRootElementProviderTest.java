@@ -19,7 +19,7 @@ public class FastInfosetRootElementProviderTest {
     public void testRoundTripSerialization() throws Exception {
         JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
 
-        User user = new User("me", "me@exampe.com");
+        User user = new User("me", "me@example.com");
         MediaType mediaType = MediaType.valueOf("application/fastinfoset");
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
