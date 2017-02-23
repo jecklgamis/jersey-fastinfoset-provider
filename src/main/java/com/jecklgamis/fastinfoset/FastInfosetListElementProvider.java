@@ -1,4 +1,4 @@
-package com.jecklgamis;
+package com.jecklgamis.fastinfoset;
 
 import com.sun.xml.fastinfoset.stax.StAXDocumentParser;
 import com.sun.xml.fastinfoset.stax.StAXDocumentSerializer;

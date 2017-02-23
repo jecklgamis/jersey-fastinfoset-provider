@@ -1,7 +1,5 @@
 package com.jecklgamis.fastinfoset;
 
-import com.jecklgamis.FastInfosetJAXBElementProvider;
-import com.jecklgamis.FastInfosetRootElementProvider;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
