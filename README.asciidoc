@@ -5,7 +5,7 @@ Maven dependency
 
 ----
 <dependency>
-    <groupId>io.jecklgamis</groupId>
+    <groupId>com.jecklgamis</groupId>
     <artifactId>jersey-fastinfoset-provider</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
@@ -13,12 +13,29 @@ Maven dependency
 
 Example Server Configuration (Dropwizard)
 -----------------------------------------
+Run the file `ExampleApp.java` with arguments `server src/test/resources/config.yml`
 
+.ExampleApp.java
 ----
+package com.jecklgamis.fastinfoset;
+
+import com.codahale.metrics.health.HealthCheck;
+import io.dropwizard.setup.Environment;
+
+import org.glassfish.jersey.filter.LoggingFilter;
+
 public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
     @Override
     public void run(ExampleAppConfig config, Environment env) throws Exception {
-        env.jersey().register(FastInfosetJAXBElementProvider.class);
+        env.jersey().register(new ExampleResource());
+        env.healthChecks().register("default", new HealthCheck() {
+            @Override
+            protected Result check() throws Exception {
+                return Result.healthy();
+            }
+        });
+        env.jersey().register(LoggingFilter.class);
+        env.jersey().register(FastInfosetJaxbElementProvider.class);
         env.jersey().register(FastInfosetRootElementProvider.class);
     }
 
@@ -31,13 +48,43 @@ public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
 Example Client Configuration (Jersey 2 Client)
 ----------------------------------------------
 
+Run the `ExampleClient.java` (ensure `ExampleApp` is running)
+
+.ExampleClient.java
 ----
-private Client client() {
-    ClientConfig config = new ClientConfig();
-    config.register(FastInfosetJAXBElementProvider.class);
-    config.register(FastInfosetRootElementProvider.class);
-    config.property(ClientProperties.CONNECT_TIMEOUT, 5000);
-    config.property(ClientProperties.READ_TIMEOUT, 15000);
-    return JerseyClientBuilder.createClient(config);
+package com.jecklgamis.fastinfoset;
+
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.JerseyClientBuilder;
+import org.glassfish.jersey.filter.LoggingFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.Response;
+
+import static java.lang.String.format;
+
+public class ExampleClient {
+    private static final Logger logger = LoggerFactory.getLogger(ExampleClient.class);
+
+    public static void main(String[] args) throws Exception {
+        Response response = client().target("http://127.0.0.1:5050").request()
+                .accept("application/fastinfoset").get(Response.class);
+        User user = response.readEntity(User.class);
+        logger.info(format("%s %s", user.getUsername(), user.getEmail()));
+    }
+
+    private static Client client() {
+        ClientConfig config = new ClientConfig();
+        config.register(LoggingFilter.class);
+        config.register(FastInfosetJaxbElementProvider.class);
+        config.register(FastInfosetRootElementProvider.class);
+        return JerseyClientBuilder.createClient(config);
+    }
 }
+
 ----
+
+
+
