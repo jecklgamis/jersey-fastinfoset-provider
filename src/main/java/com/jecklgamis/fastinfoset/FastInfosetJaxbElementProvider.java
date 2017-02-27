@@ -20,9 +20,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLStreamWriter;
 
-/**
- * @author Jerrico Gamis (jecklgamis@gmail.com)
- */
 @Produces({"application/fastinfoset"})
 @Consumes({"application/fastinfoset"})
 public class FastInfosetJaxbElementProvider extends AbstractJaxbElementProvider {
