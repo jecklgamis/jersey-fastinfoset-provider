@@ -5,6 +5,8 @@
     <groupId>com.jecklgamis</groupId>
     <artifactId>jersey-fastinfoset-provider</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>jersey-fastinfoset-provider</name>
     <description>Jersey 2 FastInfoset Provider</description>
     <url>http://github.com/jecklgamis/jersey-fastinfoset-provider</url>
 
