@@ -6,6 +6,7 @@
     <artifactId>jersey-fastinfoset-provider</artifactId>
     <version>1.0</version>
     <description>Jersey 2 FastInfoset Provider</description>
+    <url>http://github.com/jecklgamis/jersey-fastinfoset-provider</url>
 
     <licenses>
         <license>
