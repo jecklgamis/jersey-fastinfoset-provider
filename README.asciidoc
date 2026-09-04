@@ -1,5 +1,5 @@
 
-Jersey 2 Fastinfoset Provider image:https://travis-ci.org/jecklgamis/jersey-fastinfoset-provider.svg?branch=master["Build Status", link="https://travis-ci.org/jecklgamis/jersey-fastinfoset-provider"]
+Jersey 2 Fastinfoset Provider image:https://github.com/jecklgamis/jersey-fastinfoset-provider/actions/workflows/build.yml/badge.svg["Build Status", link="https://github.com/jecklgamis/jersey-fastinfoset-provider/actions/workflows/build.yml"]
 
 Maven dependency
 
