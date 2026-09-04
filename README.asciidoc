@@ -7,9 +7,11 @@ Maven dependency
 <dependency>
     <groupId>com.jecklgamis</groupId>
     <artifactId>jersey-fastinfoset-provider</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ----
+
+Requires Java 11 or later and Jersey 2.x (`javax.ws.rs`).
 
 Example Server Configuration (Dropwizard)
 -----------------------------------------

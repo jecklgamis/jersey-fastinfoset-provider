@@ -3,7 +3,7 @@ package com.jecklgamis.fastinfoset;
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.setup.Environment;
 
-import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 
 public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
     @Override
@@ -15,7 +15,7 @@ public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
                 return Result.healthy();
             }
         });
-        env.jersey().register(LoggingFilter.class);
+        env.jersey().register(LoggingFeature.class);
         env.jersey().register(FastInfosetJaxbElementProvider.class);
         env.jersey().register(FastInfosetRootElementProvider.class);
     }

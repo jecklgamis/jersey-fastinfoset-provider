@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Providers;
 import javax.xml.bind.JAXBContext;
@@ -23,7 +24,8 @@ public class FastInfosetRootElementProviderTest {
         MediaType mediaType = MediaType.valueOf("application/fastinfoset");
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        FastInfosetRootElementProvider provider = new FastInfosetRootElementProvider(mock(Providers.class));
+        FastInfosetRootElementProvider provider =
+                new FastInfosetRootElementProvider(mock(Providers.class), mock(Configuration.class));
         provider.writeTo(user, mediaType, forName("UTF-8"), jaxbContext.createMarshaller(), outputStream);
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());

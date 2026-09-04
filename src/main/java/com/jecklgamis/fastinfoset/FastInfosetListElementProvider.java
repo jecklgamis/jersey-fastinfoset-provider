@@ -13,6 +13,7 @@ import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Providers;
@@ -27,8 +28,8 @@ import javax.xml.stream.XMLStreamWriter;
 @Consumes({"application/fastinfoset"})
 public class FastInfosetListElementProvider extends AbstractCollectionJaxbProvider {
 
-    public FastInfosetListElementProvider(@Context Providers providers) {
-        super(providers, MediaType.valueOf("application/fastinfoset"));
+    public FastInfosetListElementProvider(@Context Providers providers, @Context Configuration configuration) {
+        super(providers, MediaType.valueOf("application/fastinfoset"), configuration);
     }
 
     @Override

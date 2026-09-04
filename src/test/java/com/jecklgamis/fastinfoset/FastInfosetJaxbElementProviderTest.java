@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Providers;
 import javax.xml.bind.JAXBContext;
@@ -25,7 +26,8 @@ public class FastInfosetJaxbElementProviderTest {
         JAXBElement<User2> element = new JAXBElement(new QName("", "User2"), User2.class, new User2("me", "me@example.com"));
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        FastInfosetJaxbElementProvider provider = new FastInfosetJaxbElementProvider(mock(Providers.class));
+        FastInfosetJaxbElementProvider provider =
+                new FastInfosetJaxbElementProvider(mock(Providers.class), mock(Configuration.class));
         provider.writeTo(element, mediaType, forName("UTF-8"), jaxbContext.createMarshaller(), outputStream);
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());

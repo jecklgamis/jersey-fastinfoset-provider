@@ -2,7 +2,7 @@ package com.jecklgamis.fastinfoset;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.JerseyClientBuilder;
-import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class ExampleClient {
 
     private static Client client() {
         ClientConfig config = new ClientConfig();
-        config.register(LoggingFilter.class);
+        config.register(LoggingFeature.class);
         config.register(FastInfosetJaxbElementProvider.class);
         config.register(FastInfosetRootElementProvider.class);
         return JerseyClientBuilder.createClient(config);
