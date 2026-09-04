@@ -1,30 +1,30 @@
+# Jersey 2 Fastinfoset Provider
 
-Jersey 2 Fastinfoset Provider image:https://github.com/jecklgamis/jersey-fastinfoset-provider/actions/workflows/build.yml/badge.svg["Build Status", link="https://github.com/jecklgamis/jersey-fastinfoset-provider/actions/workflows/build.yml"]
+[![Build Status](https://github.com/jecklgamis/jersey-fastinfoset-provider/actions/workflows/build.yml/badge.svg)](https://github.com/jecklgamis/jersey-fastinfoset-provider/actions/workflows/build.yml)
 
-Maven dependency
+## Maven dependency
 
-----
+```xml
 <dependency>
     <groupId>com.jecklgamis</groupId>
     <artifactId>jersey-fastinfoset-provider</artifactId>
     <version>1.1</version>
 </dependency>
-----
+```
 
 Requires Java 11 or later and Jersey 2.x (`javax.ws.rs`).
 
-Example Server Configuration (Dropwizard)
------------------------------------------
+## Example Server Configuration (Dropwizard)
+
 Run the file `ExampleApp.java` with arguments `server src/test/resources/config.yml`
 
-.ExampleApp.java
-----
+```java
 package com.jecklgamis.fastinfoset;
 
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.setup.Environment;
 
-import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 
 public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
     @Override
@@ -36,7 +36,7 @@ public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
                 return Result.healthy();
             }
         });
-        env.jersey().register(LoggingFilter.class);
+        env.jersey().register(LoggingFeature.class);
         env.jersey().register(FastInfosetJaxbElementProvider.class);
         env.jersey().register(FastInfosetRootElementProvider.class);
     }
@@ -45,20 +45,18 @@ public class ExampleApp extends io.dropwizard.Application<ExampleAppConfig> {
         new ExampleApp().run(args);
     }
 }
-----
+```
 
-Example Client Configuration (Jersey 2 Client)
-----------------------------------------------
+## Example Client Configuration (Jersey 2 Client)
 
 Run the `ExampleClient.java` (ensure `ExampleApp` is running)
 
-.ExampleClient.java
-----
+```java
 package com.jecklgamis.fastinfoset;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.JerseyClientBuilder;
-import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,14 +77,10 @@ public class ExampleClient {
 
     private static Client client() {
         ClientConfig config = new ClientConfig();
-        config.register(LoggingFilter.class);
+        config.register(LoggingFeature.class);
         config.register(FastInfosetJaxbElementProvider.class);
         config.register(FastInfosetRootElementProvider.class);
         return JerseyClientBuilder.createClient(config);
     }
 }
-
-----
-
-
-
+```
